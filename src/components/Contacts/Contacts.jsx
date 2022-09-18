@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import Box from "components/Box";
 import Filter from "components/Filter";
 import ContactsList from "components/ContsctsList"
@@ -5,10 +6,6 @@ import { Header } from "./Contacts.styled";
 
 
 const Contacts = ({ contacts, filter, onChange }) => {
-
-    // const handleFilter = e => {
-    //     e.target.value
-    // }
 
     return(            
         <Box 
@@ -24,3 +21,15 @@ const Contacts = ({ contacts, filter, onChange }) => {
 }
 
 export default Contacts;
+
+PropTypes.propTypes = {    
+    contacts: PropTypes.arrayOf(
+        PropTypes.shape({
+            id: PropTypes.string.isRequired,
+            name: PropTypes.string.isRequired,
+            number: PropTypes.string.isRequired,
+        })
+    ),
+    filter: PropTypes.string,
+    onChange: PropTypes.func.isRequired,
+}
