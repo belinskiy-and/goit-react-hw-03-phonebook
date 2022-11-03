@@ -1,11 +1,9 @@
 import PropTypes from "prop-types";
+
 import Box from "components/Box";
-import Filter from "components/Filter";
-import ContactsList from "components/ContsctsList"
-import { Header } from "./Contacts.styled";
+import { ContactItem, MdOutlineDeleteStyled } from "./Contacts.styled";
 
-
-const Contacts = ({ contacts, filter, onChange }) => {
+const Contacts = ({ contacts, handleDelete }) => {
 
     return(            
         <Box 
@@ -13,16 +11,19 @@ const Contacts = ({ contacts, filter, onChange }) => {
             border="none"
             py={4}                
         >
-            <Header>Contacts</Header>
-            <Filter filter={filter} onChange={onChange}  />
-            <ContactsList contacts={contacts} />
+            <ul>
+                {contacts.map(( {id, name, number} ) => (
+                        <ContactItem key={id}>{name}: {number} <MdOutlineDeleteStyled onClick={() => handleDelete(id)} /></ContactItem>
+                    )                
+                )}
+            </ul>
         </Box>        
     );
 }
 
 export default Contacts;
 
-PropTypes.propTypes = {    
+Contacts.propTypes = {    
     contacts: PropTypes.arrayOf(
         PropTypes.shape({
             id: PropTypes.string.isRequired,
@@ -30,6 +31,5 @@ PropTypes.propTypes = {
             number: PropTypes.string.isRequired,
         })
     ),
-    filter: PropTypes.string,
-    onChange: PropTypes.func.isRequired,
+    handleDelete: PropTypes.func.isRequired,
 }

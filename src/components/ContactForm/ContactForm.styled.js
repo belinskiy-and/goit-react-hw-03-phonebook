@@ -1,11 +1,6 @@
 import styled from "styled-components";
 import { Field, ErrorMessage } from "formik";
 
-export const Header = styled.h1`
-    font-size: ${ p => p.theme.fontSizes.xl};
-
-`;
-
 export const Label = styled.label`
     font-size: ${p => p.theme.fontSizes.l};
     display: flex;

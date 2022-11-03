@@ -2,7 +2,7 @@ import { Component } from "react";
 import Box from "components/Box";
 import { Formik, Form } from 'formik';
 import * as yup from 'yup';
-import { Header, Label, Input, InputError } from "./Phonebook.styled";
+import { Label, Input, InputError } from "./ContactForm.styled";
 
 const initialValues = {
     name: '',
@@ -14,7 +14,7 @@ const schema = yup.object().shape({
     number: yup.string().min(5).max(13).required(),
 });
 
-class Phonebook extends Component {
+class ContactForm extends Component {
 
     onSubmit = (values, {resetForm}) => {
         this.props.onSubmit(values);
@@ -25,7 +25,7 @@ class Phonebook extends Component {
 
         return(
             <>
-                <Header>Phonebook</Header>
+                
                 <Box 
                     width="full" 
                     border="normal"
@@ -54,4 +54,4 @@ class Phonebook extends Component {
     }
 }
 
-export default Phonebook;
+export default ContactForm;

@@ -1,8 +1,11 @@
 import { Component } from "react";
 import { nanoid } from 'nanoid'
 import Box from "./Box";
-import Phonebook from "./Phonebook";
+import ContactForm from "./ContactForm";
 import Contacts from "./Contacts";
+import Header from "./Header";
+import Filter from "./Filter";
+
 
 const LS_NAME = "Phonebook_contacts";
 
@@ -47,6 +50,12 @@ export class App extends Component {
     }  
   };
 
+  deleteContact = id => {
+    this.setState(({ contacts }) => {
+      return { contacts: contacts.filter(contact => contact.id !== id) };
+    });
+  };
+
   // Render
   render() {
 
@@ -63,8 +72,11 @@ export class App extends Component {
         width="width"        
         as='main'
       >
-        <Phonebook onSubmit={this.formSubmitHandle} />
-        <Contacts contacts={visibleContacts} filter={filter} onChange={this.handleInputChange} />
+        <Header>Phonebook</Header>
+        <ContactForm onSubmit={this.formSubmitHandle} />
+        <Header>Contacts</Header>
+        <Filter filter={filter} onChange={this.handleInputChange}  />
+        <Contacts contacts={visibleContacts} handleDelete={this.deleteContact} />
       </Box>
     );
   };
